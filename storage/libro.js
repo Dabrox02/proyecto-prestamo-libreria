@@ -37,20 +37,23 @@ export const post = async (obj) => {
 }
 
 export const deleteOne = async (id) => {
-    if (typeof id !== 'number') return { status: 400, message: `El datos '${id}' no cumple con el formato` };
+    try {
+        isCampoValido({ campo: "id", valor: id, tipoEsperado: "number" })
+    } catch (e) {
+        return { status: 400, message: e.message }
+    }
     config.method = "DELETE";
     let res = await fetch(`${uri}/libro/${id}`, config);
     return res.status;
 }
 
 export const putOne = async (obj = {}) => {
-    if (!obj.id) return { status: 400, message: `Usuario mande un los datos plis :)` };
     const { id, autorId, categoriaId, editorialId, titulo, fechaLanzamiento, isbn, numPaginacion, estadoId } = obj;
     let date = new Date(fechaLanzamiento);
     try {
+        isCampoValido({ campo: "id", valor: id, tipoEsperado: "number" })
         isCampoValido({ campo: "date", valor: date, tipoEsperado: "date" })
         if (!(date.getFullYear() <= 2040)) throw new Error(`${date}. Fecha invalida`);
-        isCampoValido({ campo: "id", valor: id, tipoEsperado: "number" })
         isCampoValido({ campo: "autorId", valor: autorId, tipoEsperado: "number" })
         isCampoValido({ campo: "categoriaId", valor: categoriaId, tipoEsperado: "number" })
         isCampoValido({ campo: "editorialId", valor: editorialId, tipoEsperado: "number" })
@@ -94,7 +97,7 @@ export const putOne = async (obj = {}) => {
 // }));
 
 // * DELETE DE PRUEBA
-console.log(await deleteOne(6));
+// console.log(await deleteOne(6));
 
 // * GETALL DE PRUEBA
-console.log(await getAll());
+// console.log(await getAll());
