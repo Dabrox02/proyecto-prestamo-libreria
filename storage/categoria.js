@@ -1,5 +1,5 @@
 import env from "../config.js"
-import { isCampoValido } from "../util/validaciones.js"
+import { isCampoValido, isObjectoValido } from "../util/validaciones.js"
 
 const uri = `${env.ssl + env.hostName}:${env.port}`;
 const endpoint = `/categoria`;
@@ -24,6 +24,7 @@ export const getAll = async () => {
 export const post = async (obj) => {
     let body = {};
     try {
+        isObjectoValido(obj);
         Object.entries(interfaz).forEach(e => Object.assign(body, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })));
     } catch (e) {
         return { status: 400, message: e.message }
@@ -48,6 +49,7 @@ export const deleteOne = async (id) => {
 export const putOne = async (obj = {}) => {
     let body = {};
     try {
+        isObjectoValido(obj);
         isCampoValido({ campo: Object.keys(primaryKey)[0], valor: obj.id, tipoEsperado: Object.values(primaryKey)[0] });
         Object.entries(interfaz).forEach(e => Object.assign(body, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })));
     } catch (e) {

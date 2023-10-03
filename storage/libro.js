@@ -1,5 +1,5 @@
 import env from "../config.js"
-import { isCampoValido } from "../util/validaciones.js"
+import { isCampoValido, isObjectoValido } from "../util/validaciones.js"
 
 const uri = `${env.ssl + env.hostName}:${env.port}`;
 const endpoint = `/libro`;
@@ -28,12 +28,11 @@ export const getAll = async () => {
     return res;
 }
 
-export const post = async (obj) => {
+export const post = async (obj = {}) => {
     let body = {}
-    let date = new Date(obj.fechaLanzamiento);
     try {
+        isObjectoValido(obj);
         Object.entries(interfaz).forEach(e => Object.assign(body, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })));
-        if (!(date.getFullYear() <= 2040)) throw new Error(`${date}. Fecha invalida`);
     } catch (e) {
         return { status: 400, message: e.message }
     }
@@ -56,11 +55,10 @@ export const deleteOne = async (id) => {
 
 export const putOne = async (obj = {}) => {
     let body = {}
-    let date = new Date(obj.fechaLanzamiento);
     try {
+        isObjectoValido(obj);
         isCampoValido({ campo: Object.keys(primaryKey)[0], valor: obj.id, tipoEsperado: Object.values(primaryKey)[0] });
         Object.entries(interfaz).forEach(e => Object.assign(body, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })));
-        if (!(date.getFullYear() <= 2040)) throw new Error(`${date}. Fecha invalida`);
     } catch (e) {
         return { status: 400, message: e.message }
     }
