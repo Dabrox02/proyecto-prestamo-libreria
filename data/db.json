@@ -2,63 +2,7 @@
   "categoria": [],
   "editorial": [],
   "estado-libro": [],
-  "libro": [
-    {
-      "id": 1,
-      "autorId": 678,
-      "categoriaId": 799,
-      "editorialId": 153,
-      "titulo": "Morbi quis urna. Nunc",
-      "fechaLanzamiento": "2023-02-21",
-      "isbn": "B25166D7-194F-A754-3384-9459EC1A44B7",
-      "numPaginacion": 95,
-      "estadoId": 854
-    },
-    {
-      "id": 2,
-      "autorId": 266,
-      "categoriaId": 726,
-      "editorialId": 285,
-      "titulo": "imperdiet",
-      "fechaLanzamiento": "2024-01-05",
-      "isbn": "1483DE1D-35B2-D855-87B9-E65FAD8CB227",
-      "numPaginacion": 775,
-      "estadoId": 996
-    },
-    {
-      "id": 3,
-      "autorId": 181,
-      "categoriaId": 467,
-      "editorialId": 515,
-      "titulo": "in, cursus et, eros. Proin",
-      "fechaLanzamiento": "2023-10-18",
-      "isbn": "A32AAAA7-7BA1-3459-17A2-623A8152E1EE",
-      "numPaginacion": 258,
-      "estadoId": 555
-    },
-    {
-      "id": 4,
-      "autorId": 731,
-      "categoriaId": 120,
-      "editorialId": 384,
-      "titulo": "facilisis eget, ipsum.",
-      "fechaLanzamiento": "2024-07-10",
-      "isbn": "EACC9243-C0D7-0384-F53F-DBD03FF36D1B",
-      "numPaginacion": 673,
-      "estadoId": 452
-    },
-    {
-      "id": 5,
-      "autorId": 53,
-      "categoriaId": 920,
-      "editorialId": 169,
-      "titulo": "taciti sociosqu ad litora torquent",
-      "fechaLanzamiento": "2024-04-26",
-      "isbn": "BB91AAC1-59CF-B53B-555E-3C464A92DF84",
-      "numPaginacion": 724,
-      "estadoId": 576
-    }
-  ],
+  "libro": [],
   "prestamo": [],
   "reserva": [],
   "autor": [],
