@@ -3,6 +3,12 @@ import { isCampoValido } from "../util/validaciones.js"
 
 const uri = `${env.ssl + env.hostName}:${env.port}`;
 const endpoint = `/categoria`;
+const primaryKey = {
+    "id_categoria": "number"
+};
+const interfaz = {
+    "nombre": "string"
+}
 const config = {
     method: undefined,
     headers: { "content-type": "application/json" },
@@ -16,9 +22,8 @@ export const getAll = async () => {
 }
 
 export const post = async (obj) => {
-    const { nombre } = obj;
     try {
-        isCampoValido({ campo: "nombre", valor: nombre, tipoEsperado: "string" })
+        Object.entries(interfaz).forEach(e => isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] }));
     } catch (e) {
         return { status: 400, message: e.message }
     }
@@ -30,7 +35,7 @@ export const post = async (obj) => {
 
 export const deleteOne = async (id) => {
     try {
-        isCampoValido({ campo: "id", valor: id, tipoEsperado: "number" })
+        isCampoValido({ campo: Object.keys(primaryKey)[0], valor: id, tipoEsperado: Object.values(primaryKey)[0] });
     } catch (e) {
         return { status: 400, message: e.message }
     }
@@ -40,16 +45,15 @@ export const deleteOne = async (id) => {
 }
 
 export const putOne = async (obj = {}) => {
-    const { id, nombre } = obj;
     try {
-        isCampoValido({ campo: "id", valor: id, tipoEsperado: "number" })
-        isCampoValido({ campo: "nombre", valor: nombre, tipoEsperado: "string" })
+        isCampoValido({ campo: Object.keys(primaryKey)[0], valor: obj.id, tipoEsperado: Object.values(primaryKey)[0] });
+        Object.entries(interfaz).forEach(e => isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] }));
     } catch (e) {
         return { status: 400, message: e.message }
     }
     config.method = "PUT";
     config.body = JSON.stringify(obj);
-    let res = await (await fetch(`${uri}${endpoint}/${id}`, config)).json();
+    let res = await (await fetch(`${uri}${endpoint}/${obj.id}`, config)).json();
     return res;
 }
 
