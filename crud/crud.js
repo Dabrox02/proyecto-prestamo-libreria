@@ -1,11 +1,19 @@
-export const getAll = async () => {
+import env from "../config.js"
+import { isCampoValido, isObjectoValido } from "../util/validaciones.js"
+
+const config = {
+    method: undefined,
+    headers: { "content-type": "application/json" },
+}
+
+const getAll = async ({ endpoint }) => {
     config.method = "GET";
     config.body = undefined;
-    let res = await (await fetch(`${uri}${endpoint}`, config)).json();
+    let res = await (await fetch(`${env.uri}${endpoint}`, config)).json();
     return res;
 }
 
-export const getOne = async (id) => {
+const getOne = async ({ endpoint, primaryKey, id }) => {
     try {
         isCampoValido({ campo: Object.keys(primaryKey)[0], valor: id, tipoEsperado: Object.values(primaryKey)[0] });
     } catch (e) {
@@ -13,11 +21,11 @@ export const getOne = async (id) => {
     }
     config.method = "GET";
     config.body = undefined;
-    let res = await (await fetch(`${uri}${endpoint}/${id}`, config)).json();
+    let res = await (await fetch(`${env.uri}${endpoint}/${id}`, config)).json();
     return res;
 }
 
-export const post = async (obj) => {
+const post = async ({ endpoint, interfaz, obj }) => {
     let body = {};
     try {
         isObjectoValido(obj);
@@ -27,36 +35,44 @@ export const post = async (obj) => {
     }
     config.method = "POST";
     config.body = JSON.stringify(body);
-    let res = await (await fetch(`${uri}${endpoint}`, config)).json();
+    let res = await (await fetch(`${env.uri}${endpoint}`, config)).json();
     return res;
 }
 
-export const deleteOne = async (id) => {
+const deleteOne = async ({ endpoint, primaryKey, id }) => {
     try {
         isCampoValido({ campo: Object.keys(primaryKey)[0], valor: id, tipoEsperado: Object.values(primaryKey)[0] });
     } catch (e) {
-        return { status: 400, message: e.message }
+        return { status: 400, message: e.message };
     }
     config.method = "DELETE";
-    let res = await fetch(`${uri}${endpoint}/${id}`, config);
+    let res = await fetch(`${env.uri}${endpoint}/${id}`, config);
     return res.status;
 }
 
-export const putOne = async (obj = {}) => {
+const putOne = async ({ endpoint, primaryKey, interfaz, obj }) => {
     let newData = {};
     let oldData = {};
     try {
-        oldData = await getOne(obj.id);
+        oldData = await getOne({ endpoint, primaryKey, id: obj.id });
         isObjectoValido(obj);
         isCampoValido({ campo: Object.keys(primaryKey)[0], valor: obj.id, tipoEsperado: Object.values(primaryKey)[0] });
         Object.entries(interfaz).forEach(e => {
             obj[e[0]] ? Object.assign(newData, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })) : "";
         })
     } catch (e) {
-        return { status: 400, message: e.message }
+        return { status: 400, message: e.message };
     }
     config.method = "PUT";
     config.body = JSON.stringify({ ...oldData, ...newData });
-    let res = await (await fetch(`${uri}${endpoint}/${obj.id}`, config)).json();
+    let res = await (await fetch(`${env.uri}${endpoint}/${obj.id}`, config)).json();
     return res;
+}
+
+export default {
+    getAll,
+    getOne,
+    post,
+    putOne,
+    deleteOne
 }
