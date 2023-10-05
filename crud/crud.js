@@ -30,12 +30,7 @@ const post = async ({ endpoint, interfaz, foreignKeys, obj }) => {
     try {
         isObjectoValido(obj);
         Object.entries(interfaz).forEach(e => Object.assign(body, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })));
-        for (const [key, value] of Object.entries(foreignKeys)) {
-            if (obj[key]) {
-                let valid = await isRelacionValida({ id: obj[key], foreignKey: key, endpoint: value });
-                if (valid.message) throw new Error(valid.message);
-            }
-        }
+        await isRelacionValida({obj, foreignKeys});
     } catch (e) {
         return { status: 400, message: e.message }
     }
@@ -57,24 +52,18 @@ const deleteOne = async ({ endpoint, primaryKey, id }) => {
 }
 
 const putOne = async ({ endpoint, primaryKey, foreignKeys, interfaz, obj }) => {
-    let newData = {};
-    let oldData = {};
+    let data = {};
     try {
-        oldData = await getOne({ endpoint, primaryKey, id: obj.id });
+        data = {...await getOne({ endpoint, primaryKey, id: obj.id })};
         isObjectoValido(obj);
         isCampoValido({ campo: Object.keys(primaryKey)[0], valor: obj.id, tipoEsperado: Object.values(primaryKey)[0] });
-        Object.entries(interfaz).forEach(e => obj[e[0]] ? Object.assign(newData, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })) : "");
-        for (const [key, value] of Object.entries(foreignKeys)) {
-            if (obj[key]) {
-                let valid = await isRelacionValida({ id: obj[key], foreignKey: key, endpoint: value });
-                if (valid.message) throw new Error(valid.message);
-            }
-        }
+        Object.entries(interfaz).forEach(e => obj[e[0]] ? Object.assign(data, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })) : "");
+        await isRelacionValida({obj, foreignKeys});
     } catch (e) {
         return { status: 400, message: e.message };
     }
     config.method = "PUT";
-    config.body = JSON.stringify({ ...oldData, ...newData });
+    config.body = JSON.stringify(data);
     let res = await (await fetch(`${env.uri}${endpoint}/${obj.id}`, config)).json();
     return res;
 }
