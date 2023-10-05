@@ -4,12 +4,6 @@ const endpoint = `/libro`;
 const primaryKey = {
     "id_libro": "number"
 };
-const foreignKeys = {
-    "id_autor": "/autor",
-    "id_categoria": "/categoria",
-    "id_editorial": "/editorial",
-    "id_estado": "/estado-libro"
-};
 const interfaz = {
     "id_autor": "number",
     "id_categoria": "number",
@@ -34,11 +28,11 @@ const deleteOne = async (id) => {
 }
 
 const post = async (obj = {}) => {
-    return await crud.post({ endpoint, interfaz, foreignKeys, obj });
+    return await crud.post({ endpoint, interfaz, obj });
 }
 
 const putOne = async (obj = {}) => {
-    return await crud.putOne({ endpoint, primaryKey, foreignKeys, interfaz, obj });
+    return await crud.putOne({ endpoint, primaryKey, interfaz, obj });
 }
 
 export default {

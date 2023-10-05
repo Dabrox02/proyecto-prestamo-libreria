@@ -4,7 +4,6 @@ const endpoint = `/usuario`;
 const primaryKey = {
     "id_usuario": "number"
 };
-const foreignKeys = {};
 const interfaz = {
     "nombre": "string",
     "apellido": "string",
@@ -22,15 +21,15 @@ const getOne = async (id) => {
 }
 
 const deleteOne = async (id) => {
-    return await crud.deleteOne({ endpoint, primaryKey, id });
+    return await crud.deleteOne({ endpoint, id });
 }
 
 const post = async (obj = {}) => {
-    return await crud.post({ endpoint, interfaz, foreignKeys, obj });
+    return await crud.post({ endpoint, interfaz, obj });
 }
 
 const putOne = async (obj = {}) => {
-    return await crud.putOne({ endpoint, primaryKey, foreignKeys, interfaz, obj });
+    return await crud.putOne({ endpoint, primaryKey, interfaz, obj });
 }
 
 export default {
