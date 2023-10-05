@@ -1,5 +1,5 @@
 import env from "../config.js"
-import { isCampoValido, isObjectoValido } from "../util/validaciones.js"
+import { isCampoValido, isObjectoValido, isRelacionValida } from "../util/validaciones.js"
 
 const config = {
     method: undefined,
@@ -25,11 +25,17 @@ const getOne = async ({ endpoint, primaryKey, id }) => {
     return res;
 }
 
-const post = async ({ endpoint, interfaz, obj }) => {
+const post = async ({ endpoint, interfaz, foreignKeys, obj }) => {
     let body = {};
     try {
         isObjectoValido(obj);
         Object.entries(interfaz).forEach(e => Object.assign(body, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })));
+        for (const [key, value] of Object.entries(foreignKeys)) {
+            if (obj[key]) {
+                let valid = await isRelacionValida({ id: obj[key], foreignKey: key, endpoint: value });
+                if (valid.message) throw new Error(valid.message);
+            }
+        }
     } catch (e) {
         return { status: 400, message: e.message }
     }
@@ -50,16 +56,20 @@ const deleteOne = async ({ endpoint, primaryKey, id }) => {
     return res.status;
 }
 
-const putOne = async ({ endpoint, primaryKey, interfaz, obj }) => {
+const putOne = async ({ endpoint, primaryKey, foreignKeys, interfaz, obj }) => {
     let newData = {};
     let oldData = {};
     try {
         oldData = await getOne({ endpoint, primaryKey, id: obj.id });
         isObjectoValido(obj);
         isCampoValido({ campo: Object.keys(primaryKey)[0], valor: obj.id, tipoEsperado: Object.values(primaryKey)[0] });
-        Object.entries(interfaz).forEach(e => {
-            obj[e[0]] ? Object.assign(newData, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })) : "";
-        })
+        Object.entries(interfaz).forEach(e => obj[e[0]] ? Object.assign(newData, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })) : "");
+        for (const [key, value] of Object.entries(foreignKeys)) {
+            if (obj[key]) {
+                let valid = await isRelacionValida({ id: obj[key], foreignKey: key, endpoint: value });
+                if (valid.message) throw new Error(valid.message);
+            }
+        }
     } catch (e) {
         return { status: 400, message: e.message };
     }
