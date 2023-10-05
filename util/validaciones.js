@@ -1,3 +1,5 @@
+import env from "../config.js"
+
 export const isCampoValido = ({ campo = "", valor, tipoEsperado }) => {
     if (valor === null || valor === undefined) throw new Error(`Campo: ${campo}. No esta definido`);
     if (tipoEsperado == "date") {
@@ -12,3 +14,7 @@ export const isObjectoValido = (obj) => {
     if (obj == undefined || obj.constructor.name !== "Object" || Object.entries(obj).length == 0) throw new Error(`No envio parametros correctos.`);
 }
 
+export const isRelacionValida = async ({ id, foreignKey, endpoint }) => {
+    let res = await (await fetch(`${env.uri}${endpoint}/${id}`)).json()
+    return (Object.entries(res).length == 0) ? { status: 400, message: `Valor ${id} del campo ${foreignKey}, no existe.` } : {}
+}
