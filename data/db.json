@@ -1,10 +1,304 @@
 {
-  "categoria": [],
-  "editorial": [],
-  "estado-libro": [],
-  "libro": [],
-  "prestamo": [],
-  "reserva": [],
-  "autor": [],
-  "usuario": []
+  "categoria": [
+    {
+      "id": 1,
+      "nombre": "blandit viverra."
+    },
+    {
+      "id": 2,
+      "nombre": "Sed dictum."
+    },
+    {
+      "id": 3,
+      "nombre": "nulla ante,"
+    },
+    {
+      "id": 4,
+      "nombre": "non enim."
+    },
+    {
+      "id": 5,
+      "nombre": "convallis dolor."
+    }
+  ],
+  "editorial": [
+    {
+      "id": 1,
+      "nombre": "Faucibus Morbi Foundation",
+      "direccion": "Ap #519-1281 Proin Ave",
+      "telefono": "1-557-835-2662"
+    },
+    {
+      "id": 2,
+      "nombre": "Luctus Felis Purus LLC",
+      "direccion": "P.O. Box 887, 2234 Nonummy Rd.",
+      "telefono": "1-856-825-4332"
+    },
+    {
+      "id": 3,
+      "nombre": "Etiam LLP",
+      "direccion": "Ap #945-2126 Donec Rd.",
+      "telefono": "(250) 170-3272"
+    },
+    {
+      "id": 4,
+      "nombre": "Nullam Enim Sed Foundation",
+      "direccion": "689-1828 Posuere Road",
+      "telefono": "1-852-373-4403"
+    },
+    {
+      "id": 5,
+      "nombre": "Mi Ac PC",
+      "direccion": "4710 Ridiculus Avenue",
+      "telefono": "(764) 468-9931"
+    }
+  ],
+  "estado-libro": [
+    {
+      "id": 1,
+      "nombre": "nunc risus",
+      "descripcion": "purus, in molestie tortor nibh sit amet orci. Ut sagittis"
+    },
+    {
+      "id": 2,
+      "nombre": "dolor elit,",
+      "descripcion": "eleifend egestas. Sed pharetra, felis eget varius ultrices, mauris ipsum"
+    },
+    {
+      "id": 3,
+      "nombre": "ac ipsum.",
+      "descripcion": "sit amet nulla. Donec non justo. Proin non massa non"
+    },
+    {
+      "id": 4,
+      "nombre": "dolor. Fusce",
+      "descripcion": "semper pretium neque. Morbi quis urna. Nunc quis arcu vel"
+    },
+    {
+      "id": 5,
+      "nombre": "egestas a,",
+      "descripcion": "Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris."
+    }
+  ],
+  "libro": [
+    {
+      "id": 1,
+      "id_autor": 3,
+      "id_categoria": 5,
+      "id_editorial": 2,
+      "titulo": "scelerisque neque sed",
+      "fecha_publicacion": "2023-12-21",
+      "isbn": "24873121-4",
+      "num_paginas": 187,
+      "id_estado": 5
+    },
+    {
+      "id": 2,
+      "id_autor": 2,
+      "id_categoria": 4,
+      "id_editorial": 5,
+      "titulo": "arcu.",
+      "fecha_publicacion": "2024-05-16",
+      "isbn": "39705505-1",
+      "num_paginas": 1507,
+      "id_estado": 1
+    },
+    {
+      "id": 3,
+      "id_autor": 4,
+      "id_categoria": 5,
+      "id_editorial": 3,
+      "titulo": "nisi. Aenean eget metus.",
+      "fecha_publicacion": "2023-05-23",
+      "isbn": "25381765-8",
+      "num_paginas": 328,
+      "id_estado": 4
+    },
+    {
+      "id": 4,
+      "id_autor": 4,
+      "id_categoria": 5,
+      "id_editorial": 5,
+      "titulo": "magna. Lorem ipsum",
+      "fecha_publicacion": "2022-11-29",
+      "isbn": "50744189-0",
+      "num_paginas": 1738,
+      "id_estado": 4
+    },
+    {
+      "id": 5,
+      "id_autor": 3,
+      "id_categoria": 3,
+      "id_editorial": 3,
+      "titulo": "ornare sagittis felis.",
+      "fecha_publicacion": "2022-10-10",
+      "isbn": "27225855-4",
+      "num_paginas": 552,
+      "id_estado": 1
+    }
+  ],
+  "prestamo": [
+    {
+      "id": 1,
+      "id_usuario": 4,
+      "id_libro": 2,
+      "fecha_prestamo": "2023-01-09",
+      "fecha_devolucion": "2024-03-12",
+      "estado": "ornare, libero"
+    },
+    {
+      "id": 2,
+      "id_usuario": 1,
+      "id_libro": 5,
+      "fecha_prestamo": "2024-01-31",
+      "fecha_devolucion": "2023-05-22",
+      "estado": "eu turpis."
+    },
+    {
+      "id": 3,
+      "id_usuario": 4,
+      "id_libro": 2,
+      "fecha_prestamo": "2024-08-07",
+      "fecha_devolucion": "2023-11-13",
+      "estado": "sagittis placerat."
+    },
+    {
+      "id": 4,
+      "id_usuario": 2,
+      "id_libro": 4,
+      "fecha_prestamo": "2024-05-30",
+      "fecha_devolucion": "2023-08-21",
+      "estado": "Fusce mollis."
+    },
+    {
+      "id": 5,
+      "id_usuario": 5,
+      "id_libro": 3,
+      "fecha_prestamo": "2024-02-15",
+      "fecha_devolucion": "2023-05-11",
+      "estado": "dignissim tempor"
+    }
+  ],
+  "reserva": [
+    {
+      "id": 1,
+      "id_usuario": 4,
+      "id_libro": 2,
+      "fecha_reserva": "2023-01-09",
+      "fecha_reserva_fin": "2024-03-12",
+      "estado": "ornare, libero"
+    },
+    {
+      "id": 2,
+      "id_usuario": 1,
+      "id_libro": 5,
+      "fecha_reserva": "2024-01-31",
+      "fecha_reserva_fin": "2023-05-22",
+      "estado": "eu turpis."
+    },
+    {
+      "id": 3,
+      "id_usuario": 4,
+      "id_libro": 2,
+      "fecha_reserva": "2024-08-07",
+      "fecha_reserva_fin": "2023-11-13",
+      "estado": "sagittis placerat."
+    },
+    {
+      "id": 4,
+      "id_usuario": 2,
+      "id_libro": 4,
+      "fecha_reserva": "2024-05-30",
+      "fecha_reserva_fin": "2023-08-21",
+      "estado": "Fusce mollis."
+    },
+    {
+      "id": 5,
+      "id_usuario": 5,
+      "id_libro": 3,
+      "fecha_reserva": "2024-02-15",
+      "fecha_reserva_fin": "2023-05-11",
+      "estado": "dignissim tempor"
+    }
+  ],
+  "autor": [
+    {
+      "id": 1,
+      "nombre": "Mara",
+      "apellido": "Cross",
+      "nacionalidad": "Germany"
+    },
+    {
+      "id": 2,
+      "nombre": "Hyatt",
+      "apellido": "Burns",
+      "nacionalidad": "Chile"
+    },
+    {
+      "id": 3,
+      "nombre": "Cain",
+      "apellido": "Herrera",
+      "nacionalidad": "Russian Federation"
+    },
+    {
+      "id": 4,
+      "nombre": "Thane",
+      "apellido": "Bray",
+      "nacionalidad": "Singapore"
+    },
+    {
+      "id": 5,
+      "nombre": "Jayme",
+      "apellido": "Mcconnell",
+      "nacionalidad": "Brazil"
+    },
+    {
+      "nombre": "Jonah",
+      "apellido": "Ewing",
+      "nacionalidad": "español",
+      "id": 6
+    }
+  ],
+  "usuario": [
+    {
+      "id": 1,
+      "nombre": "September",
+      "apellido": "Rhodes",
+      "direccion": "Ap #656-1575 Mauris Road",
+      "telefono": "1-517-648-2240",
+      "email": "in.consectetuer.ipsum@yahoo.org"
+    },
+    {
+      "id": 2,
+      "nombre": "Olivia",
+      "apellido": "Frank",
+      "direccion": "P.O. Box 950, 9527 Mi Rd.",
+      "telefono": "488-1193",
+      "email": "nunc.ullamcorper@outlook.couk"
+    },
+    {
+      "id": 3,
+      "nombre": "Austin",
+      "apellido": "Rosales",
+      "direccion": "P.O. Box 182, 4724 A St.",
+      "telefono": "892-6333",
+      "email": "suspendisse.sagittis.nullam@aol.edu"
+    },
+    {
+      "id": 4,
+      "nombre": "Colette",
+      "apellido": "Mccullough",
+      "direccion": "286-3074 Cras Road",
+      "telefono": "1-483-633-9687",
+      "email": "semper@hotmail.edu"
+    },
+    {
+      "id": 5,
+      "nombre": "Fatima",
+      "apellido": "Hodges",
+      "direccion": "737-1986 Gravida Av.",
+      "telefono": "1-465-909-1087",
+      "email": "id.risus@outlook.net"
+    }
+  ]
 }
