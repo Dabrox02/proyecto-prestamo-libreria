@@ -4,11 +4,12 @@ const endpoint = `/autor`;
 const primaryKey = {
     "id_autor": "number"
 };
+const foreignKeys = {};
 const interfaz = {
     "nombre": "string",
     "apellido": "string",
     "nacionalidad": "string"
-}
+};
 
 const getAll = async () => {
     return await crud.getAll({ endpoint });
@@ -23,11 +24,11 @@ const deleteOne = async (id) => {
 }
 
 const post = async (obj = {}) => {
-    return await crud.post({ endpoint, interfaz, obj });
+    return await crud.post({ endpoint, interfaz, foreignKeys, obj });
 }
 
 const putOne = async (obj = {}) => {
-    return await crud.putOne({ endpoint, primaryKey, interfaz, obj });
+    return await crud.putOne({ endpoint, primaryKey, foreignKeys, interfaz, obj });
 }
 
 export default {
@@ -39,11 +40,11 @@ export default {
 }
 
 // * POST DE PRUEBA
-// console.log(await post({
-//     "nombre": "Jonah",
-//     "apellido": "Ewing",
-//     "nacionalidad": "español"
-// }));
+console.log(await post({
+    "nombre": "Jonah",
+    "apellido": "Ewing",
+    "nacionalidad": "español"
+}));
 
 // * PUT DE PRUEBA
 // console.log(await putOne({

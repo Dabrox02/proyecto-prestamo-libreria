@@ -4,16 +4,22 @@ const endpoint = `/libro`;
 const primaryKey = {
     "id_libro": "number"
 };
+const foreignKeys = {
+    "id_autor": "/autor",
+    "id_categoria": "/categoria",
+    "id_editorial": "/editorial",
+    "id_estado": "/estado-libro"
+};
 const interfaz = {
-    "autorId": "number",
-    "categoriaId": "number",
-    "editorialId": "number",
+    "id_autor": "number",
+    "id_categoria": "number",
+    "id_editorial": "number",
     "titulo": "string",
-    "fechaLanzamiento": "date",
+    "fecha_publicacion": "date",
     "isbn": "string",
-    "numPaginacion": "number",
-    "estadoId": "number"
-}
+    "num_paginas": "number",
+    "id_estado": "number"
+};
 
 const getAll = async () => {
     return await crud.getAll({ endpoint });
@@ -28,11 +34,11 @@ const deleteOne = async (id) => {
 }
 
 const post = async (obj = {}) => {
-    return await crud.post({ endpoint, interfaz, obj });
+    return await crud.post({ endpoint, interfaz, foreignKeys, obj });
 }
 
 const putOne = async (obj = {}) => {
-    return await crud.putOne({ endpoint, primaryKey, interfaz, obj });
+    return await crud.putOne({ endpoint, primaryKey, foreignKeys, interfaz, obj });
 }
 
 export default {
@@ -46,27 +52,27 @@ export default {
 
 // * POST DE PRUEBA
 // console.log(await post({
-//     "autorId": 628,
-//     "categoriaId": 551,
-//     "editorialId": 339,
+//     "id_autor": 1,
+//     "id_categoria": 5,
+//     "id_editorial": 5,
 //     "titulo": "aliquam eu, accumsan",
-//     "fechaLanzamiento": "2024-04-07",
+//     "fecha_publicacion": "2024-04-07",
 //     "isbn": "191E0EA6-B795-3651-62D5-2B2EAC8EC7EC",
-//     "numPaginacion": 1188,
-//     "estadoId": 455
+//     "num_paginas": 1188,
+//     "id_estado": 6
 // }));
 
 // * PUT DE PRUEBA
 // console.log(await putOne({
-//     "id": 2,
-//     "autorId": 181,
-//     "categoriaId": 467,
-//     "editorialId": 515,
+//     "id": 1,
+//     "id_autor": 5,
+//     "id_categoria": 1,
+//     "id_editorial": 5,
 //     "titulo": "in, cursus et, eros. Proin",
-//     "fechaLanzamiento": "2023-10-18",
+//     "fecha_publicacion": "2023-10-18",
 //     "isbn": "A32AAAA7-7BA1-3459-17A2-623A8152E1EE",
-//     "numPaginacion": 258,
-//     "estadoId": 555
+//     "num_paginas": 258,
+//     "id_estado": 1
 // }));
 
 // * DELETE DE PRUEBA
