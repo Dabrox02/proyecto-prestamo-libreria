@@ -12,10 +12,10 @@ const getAll = async ({ endpoint }) => {
         config.body = undefined;
         let res = await (await fetch(`${env.uri}${endpoint}`, config)).json();
         await isDataCompleta({ obj: res });
+        return res;
     } catch (e) {
         return { status: 400, message: e.message }
     }
-    return res;
 }
 
 const getOne = async ({ endpoint, primaryKey, id }) => {
@@ -24,6 +24,35 @@ const getOne = async ({ endpoint, primaryKey, id }) => {
         config.method = "GET";
         config.body = undefined;
         let res = await (await fetch(`${env.uri}${endpoint}/${id}`, config)).json();
+        await isDataCompleta({ obj: [res] });
+        return res;
+    } catch (e) {
+        return { status: 400, message: e.message }
+    }
+}
+
+const getAllDetails = async ({ endpoint }) => {
+    try {
+        let all = await getAll({ endpoint });
+        let uri = `${env.uri}${endpoint}?` + Object.keys(all[0]).filter((e) => e.includes("Id")).map((e) => `_expand=${e.split("I")[0]}&`).join("");
+        config.method = "GET";
+        config.body = undefined;
+        let res = await (await fetch(uri, config)).json();
+        await isDataCompleta({ obj: res });
+        return res;
+    } catch (e) {
+        return { status: 400, message: e.message };
+    }
+}
+
+const getOneDetails = async ({ endpoint, primaryKey, id }) => {
+    try {
+        let one = await getOne({ endpoint, primaryKey, id });
+        let uri = `${env.uri}${endpoint}/${id}?` + Object.keys(one).filter((e) => e.includes("Id")).map((e) => `_expand=${e.split("I")[0]}&`).join("");
+        console.log(uri);
+        config.method = "GET";
+        config.body = undefined;
+        let res = await (await fetch(uri, config)).json();
         await isDataCompleta({ obj: [res] });
         return res;
     } catch (e) {
@@ -77,6 +106,8 @@ const putOne = async ({ endpoint, primaryKey, interfaz, obj }) => {
 export default {
     getAll,
     getOne,
+    getAllDetails,
+    getOneDetails,
     post,
     putOne,
     deleteOne
