@@ -1,5 +1,5 @@
 import env from "../config.js"
-import { isCampoValido, isObjectoValido, isRelacionValida } from "../util/validaciones.js"
+import { isCampoValido, isObjectoValido, isRelacionValida, isDataCompleta } from "../util/validaciones.js"
 
 const config = {
     method: undefined,
@@ -7,30 +7,36 @@ const config = {
 }
 
 const getAll = async ({ endpoint }) => {
-    config.method = "GET";
-    config.body = undefined;
-    let res = await (await fetch(`${env.uri}${endpoint}`, config)).json();
+    try {
+        config.method = "GET";
+        config.body = undefined;
+        let res = await (await fetch(`${env.uri}${endpoint}`, config)).json();
+        await isDataCompleta({ obj: res });
+    } catch (e) {
+        return { status: 400, message: e.message }
+    }
     return res;
 }
 
 const getOne = async ({ endpoint, primaryKey, id }) => {
     try {
         isCampoValido({ campo: Object.keys(primaryKey)[0], valor: id, tipoEsperado: Object.values(primaryKey)[0] });
+        config.method = "GET";
+        config.body = undefined;
+        let res = await (await fetch(`${env.uri}${endpoint}/${id}`, config)).json();
+        await isDataCompleta({ obj: [res] });
+        return res;
     } catch (e) {
         return { status: 400, message: e.message }
     }
-    config.method = "GET";
-    config.body = undefined;
-    let res = await (await fetch(`${env.uri}${endpoint}/${id}`, config)).json();
-    return res;
 }
 
-const post = async ({ endpoint, interfaz, foreignKeys, obj }) => {
+const post = async ({ endpoint, interfaz, obj }) => {
     let body = {};
     try {
         isObjectoValido(obj);
         Object.entries(interfaz).forEach(e => Object.assign(body, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })));
-        await isRelacionValida({obj, foreignKeys});
+        await isRelacionValida({ obj });
     } catch (e) {
         return { status: 400, message: e.message }
     }
@@ -51,14 +57,14 @@ const deleteOne = async ({ endpoint, primaryKey, id }) => {
     return res.status;
 }
 
-const putOne = async ({ endpoint, primaryKey, foreignKeys, interfaz, obj }) => {
+const putOne = async ({ endpoint, primaryKey, interfaz, obj }) => {
     let data = {};
     try {
-        data = {...await getOne({ endpoint, primaryKey, id: obj.id })};
+        data = { ...await getOne({ endpoint, primaryKey, id: obj.id }) };
         isObjectoValido(obj);
         isCampoValido({ campo: Object.keys(primaryKey)[0], valor: obj.id, tipoEsperado: Object.values(primaryKey)[0] });
         Object.entries(interfaz).forEach(e => obj[e[0]] ? Object.assign(data, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })) : "");
-        await isRelacionValida({obj, foreignKeys});
+        await isRelacionValida({ obj });
     } catch (e) {
         return { status: 400, message: e.message };
     }
