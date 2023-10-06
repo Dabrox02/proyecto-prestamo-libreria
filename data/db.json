@@ -1,5 +1,5 @@
 {
-  "categoria": [
+  "categorias": [
     {
       "id": 1,
       "nombre": "blandit viverra."
@@ -21,7 +21,7 @@
       "nombre": "convallis dolor."
     }
   ],
-  "editorial": [
+  "editoriales": [
     {
       "id": 1,
       "nombre": "Faucibus Morbi Foundation",
@@ -53,7 +53,7 @@
       "telefono": "(764) 468-9931"
     }
   ],
-  "estado": [
+  "estados": [
     {
       "id": 1,
       "nombre": "nunc risus",
@@ -80,148 +80,148 @@
       "descripcion": "Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris."
     }
   ],
-  "libro": [
+  "libros": [
     {
       "id": 1,
-      "id_autor": 3,
-      "id_categoria": 5,
-      "id_editorial": 2,
+      "autoreId": 2,
+      "categoriaId": 5,
+      "editorialeId": 2,
       "titulo": "scelerisque neque sed",
       "fecha_publicacion": "2023-12-21",
       "isbn": "24873121-4",
       "num_paginas": 187,
-      "id_estado": 5
+      "estadoId": 5
     },
     {
       "id": 2,
-      "id_autor": 2,
-      "id_categoria": 4,
-      "id_editorial": 5,
+      "autoreId": 2,
+      "categoriaId": 4,
+      "editorialeId": 5,
       "titulo": "arcu.",
       "fecha_publicacion": "2024-05-16",
       "isbn": "39705505-1",
       "num_paginas": 1507,
-      "id_estado": 1
+      "estadoId": 5
     },
     {
       "id": 3,
-      "id_autor": 4,
-      "id_categoria": 5,
-      "id_editorial": 3,
+      "autoreId": 4,
+      "categoriaId": 5,
+      "editorialeId": 3,
       "titulo": "nisi. Aenean eget metus.",
       "fecha_publicacion": "2023-05-23",
       "isbn": "25381765-8",
       "num_paginas": 328,
-      "id_estado": 4
+      "estadoId": 4
     },
     {
       "id": 4,
-      "id_autor": 4,
-      "id_categoria": 5,
-      "id_editorial": 5,
+      "autoreId": 4,
+      "categoriaId": 5,
+      "editorialeId": 5,
       "titulo": "magna. Lorem ipsum",
       "fecha_publicacion": "2022-11-29",
       "isbn": "50744189-0",
       "num_paginas": 1738,
-      "id_estado": 4
+      "estadoId": 5
     },
     {
       "id": 5,
-      "id_autor": 3,
-      "id_categoria": 3,
-      "id_editorial": 3,
+      "autoreId": 3,
+      "categoriaId": 3,
+      "editorialeId": 3,
       "titulo": "ornare sagittis felis.",
       "fecha_publicacion": "2022-10-10",
       "isbn": "27225855-4",
       "num_paginas": 552,
-      "id_estado": 1
+      "estadoId": 5
     }
   ],
-  "prestamo": [
+  "prestamos": [
     {
       "id": 1,
-      "id_usuario": 4,
-      "id_libro": 2,
+      "usuarioId": 4,
+      "libroId": 2,
       "fecha_prestamo": "2023-01-09",
       "fecha_devolucion": "2024-03-12",
       "estado": "ornare, libero"
     },
     {
       "id": 2,
-      "id_usuario": 1,
-      "id_libro": 5,
+      "usuarioId": 1,
+      "libroId": 5,
       "fecha_prestamo": "2024-01-31",
       "fecha_devolucion": "2023-05-22",
       "estado": "eu turpis."
     },
     {
       "id": 3,
-      "id_usuario": 4,
-      "id_libro": 2,
+      "usuarioId": 4,
+      "libroId": 2,
       "fecha_prestamo": "2024-08-07",
       "fecha_devolucion": "2023-11-13",
       "estado": "sagittis placerat."
     },
     {
       "id": 4,
-      "id_usuario": 2,
-      "id_libro": 4,
+      "usuarioId": 2,
+      "libroId": 4,
       "fecha_prestamo": "2024-05-30",
       "fecha_devolucion": "2023-08-21",
       "estado": "Fusce mollis."
     },
     {
       "id": 5,
-      "id_usuario": 5,
-      "id_libro": 3,
+      "usuarioId": 5,
+      "libroId": 3,
       "fecha_prestamo": "2024-02-15",
       "fecha_devolucion": "2023-05-11",
       "estado": "dignissim tempor"
     }
   ],
-  "reserva": [
+  "reservas": [
     {
       "id": 1,
-      "id_usuario": 4,
-      "id_libro": 2,
+      "usuarioId": 4,
+      "libroId": 2,
       "fecha_reserva": "2023-01-09",
       "fecha_reserva_fin": "2024-03-12",
       "estado": "ornare, libero"
     },
     {
       "id": 2,
-      "id_usuario": 1,
-      "id_libro": 5,
+      "userId": 1,
+      "libroId": 5,
       "fecha_reserva": "2024-01-31",
       "fecha_reserva_fin": "2023-05-22",
       "estado": "eu turpis."
     },
     {
       "id": 3,
-      "id_usuario": 4,
-      "id_libro": 2,
+      "userId": 4,
+      "libroId": 2,
       "fecha_reserva": "2024-08-07",
       "fecha_reserva_fin": "2023-11-13",
       "estado": "sagittis placerat."
     },
     {
       "id": 4,
-      "id_usuario": 2,
-      "id_libro": 4,
+      "userId": 2,
+      "libroId": 4,
       "fecha_reserva": "2024-05-30",
       "fecha_reserva_fin": "2023-08-21",
       "estado": "Fusce mollis."
     },
     {
       "id": 5,
-      "id_usuario": 5,
-      "id_libro": 3,
+      "userId": 5,
+      "libroId": 3,
       "fecha_reserva": "2024-02-15",
       "fecha_reserva_fin": "2023-05-11",
       "estado": "dignissim tempor"
     }
   ],
-  "autor": [
+  "autores": [
     {
       "id": 1,
       "nombre": "Mara",
@@ -259,7 +259,7 @@
       "id": 6
     }
   ],
-  "usuario": [
+  "usuarios": [
     {
       "id": 1,
       "nombre": "September",
