@@ -2,10 +2,10 @@
   "name": "proyecto-json-server",
   "version": "1.0.0",
   "description": "",
-  "main": "src/main.js",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/main.js",
+    "start": "node src/index.js",
     "dev": "json-server --watch data/db.json --port 5010 --host 127.0.0.1 --routes data/routes.json"
   },
   "keywords": [],
