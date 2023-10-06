@@ -1,8 +1,8 @@
 import crud from "../crud/crud.js";
 
-const endpoint = `/estado`;
+const endpoint = `/estados`;
 const primaryKey = {
-    "id_estado": "number"
+    "estadoId": "number"
 };
 const interfaz = {
     "nombre": "string",

@@ -1,12 +1,12 @@
 import crud from "../crud/crud.js";
 
-const endpoint = `/reserva`;
+const endpoint = `/reservas`;
 const primaryKey = {
-    "id_reserva": "number"
+    "reservaId": "number"
 };
 const interfaz = {
-    "id_usuario": "number",
-    "id_libro": "number",
+    "usuarioId": "number",
+    "libroId": "number",
     "fecha_reserva": "date",
     "fecha_reserva_fin": "date",
     "estado": "string"

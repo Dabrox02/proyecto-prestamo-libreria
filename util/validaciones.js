@@ -15,9 +15,9 @@ export const isObjectoValido = (obj) => {
 }
 
 export const isRelacionValida = async ({ obj }) => {
-    for (const key of ["id_autor", "id_categoria", "id_editorial", "id_estado", "id_usuario", "id_libro"]) {
+    for (const key of ["autoreId", "categoriaId", "editorialeId", "estadoId", "usuarioId", "libroId"]) {
         if (obj[key]) {
-            let valid = await (await fetch(`${env.uri}/${key.split("_")[1]}/${obj[key]}`)).json();
+            let valid = await (await fetch(`${env.uri}/${key.split("I")[0]}s/${obj[key]}`)).json();
             if (Object.entries(valid).length == 0) throw new Error(`Valor ${obj[key]} del campo ${key}, no existe.`);
         }
     }

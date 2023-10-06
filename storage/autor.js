@@ -1,8 +1,8 @@
 import crud from "../crud/crud.js";
 
-const endpoint = `/autor`;
+const endpoint = `/autores`;
 const primaryKey = {
-    "id_autor": "number"
+    "autoreId": "number"
 };
 const interfaz = {
     "nombre": "string",
@@ -39,11 +39,11 @@ export default {
 }
 
 // * POST DE PRUEBA
-console.log(await post({
-    "nombre": "Jonah",
-    "apellido": "Ewing",
-    "nacionalidad": "español"
-}));
+// console.log(await post({
+//     "nombre": "Jonah",
+//     "apellido": "Ewing",
+//     "nacionalidad": "español"
+// }));
 
 // * PUT DE PRUEBA
 // console.log(await putOne({

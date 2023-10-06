@@ -1,12 +1,12 @@
 import crud from "../crud/crud.js";
 
-const endpoint = `/prestamo`;
+const endpoint = `/prestamos`;
 const primaryKey = {
-    "id_prestamo": "number"
+    "prestamoId": "number"
 };
 const interfaz = {
-    "id_usuario": "number",
-    "id_libro": "number",
+    "usuarioId": "number",
+    "libroId": "number",
     "fecha_prestamo": "date",
     "fecha_devolucion": "date",
     "estado": "string"

@@ -1,18 +1,18 @@
 import crud from "../crud/crud.js";
 
-const endpoint = `/libro`;
+const endpoint = `/libros`;
 const primaryKey = {
-    "id_libro": "number"
+    "libroId": "number"
 };
 const interfaz = {
-    "id_autor": "number",
-    "id_categoria": "number",
-    "id_editorial": "number",
+    "autoreId": "number",
+    "categoriaId": "number",
+    "editorialeId": "number",
     "titulo": "string",
     "fecha_publicacion": "date",
     "isbn": "string",
     "num_paginas": "number",
-    "id_estado": "number"
+    "estadoId": "number"
 };
 
 const getAll = async () => {
@@ -73,4 +73,4 @@ export default {
 // console.log(await deleteOne(2));
 
 // * GETALL DE PRUEBA
-// console.log(await getAll());
+console.log(await getAll());

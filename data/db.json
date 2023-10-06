@@ -190,7 +190,7 @@
     },
     {
       "id": 2,
-      "userId": 1,
+      "usuarioId": 1,
       "libroId": 5,
       "fecha_reserva": "2024-01-31",
       "fecha_reserva_fin": "2023-05-22",
@@ -198,7 +198,7 @@
     },
     {
       "id": 3,
-      "userId": 4,
+      "usuarioId": 4,
       "libroId": 2,
       "fecha_reserva": "2024-08-07",
       "fecha_reserva_fin": "2023-11-13",
@@ -206,7 +206,7 @@
     },
     {
       "id": 4,
-      "userId": 2,
+      "usuarioId": 2,
       "libroId": 4,
       "fecha_reserva": "2024-05-30",
       "fecha_reserva_fin": "2023-08-21",
@@ -214,7 +214,7 @@
     },
     {
       "id": 5,
-      "userId": 5,
+      "usuarioId": 5,
       "libroId": 3,
       "fecha_reserva": "2024-02-15",
       "fecha_reserva_fin": "2023-05-11",
