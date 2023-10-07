@@ -1,4 +1,4 @@
-import config from "../config.js";
+import config from "../../config.js";
 
 export class HeaderComponent extends HTMLElement {
 
@@ -15,7 +15,7 @@ export class HeaderComponent extends HTMLElement {
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
-            <a href="${config.uriHost}/index.html" class="nav-link">Inicio</a>
+            <a href="${config.uri}/index.html" class="nav-link">Inicio</a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">GitHub</a>

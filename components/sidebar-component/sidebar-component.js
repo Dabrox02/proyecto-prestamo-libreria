@@ -1,4 +1,4 @@
-import config from "../config.js";
+import config from "../../config.js";
 
 export class SidebarComponent extends HTMLElement {
 
@@ -10,7 +10,7 @@ export class SidebarComponent extends HTMLElement {
     this.innerHTML = /*html*/`
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="${config.uriHost}/index.html" class="brand-link">
+        <a href="${config.uri}/index.html" class="brand-link">
           <img src="https://img.icons8.com/?size=256&id=12KiRC81sMRC&format=png" alt="Libreria Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
           <span class="brand-text font-weight-light">Libreria</span>
         </a>
@@ -40,7 +40,7 @@ export class SidebarComponent extends HTMLElement {
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="${config.uriHost}/views/libros.html" class="nav-link">
+                    <a href="${config.uri}/views/libros.html" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Libros</p>
                     </a>
