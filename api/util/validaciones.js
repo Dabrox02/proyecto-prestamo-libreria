@@ -1,12 +1,19 @@
 import env from "../config.js"
 
 export const isCampoValido = ({ campo = "", valor, tipoEsperado }) => {
+    if (tipoEsperado === "url" && valor != null && !(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4}(\/\S*)?$/.test(valor))) {
+        throw new Error(`Url ${valor}: No valida`);
+    } else if (valor === null) {
+        valor = "";
+    }
     if (valor === null || valor === undefined) throw new Error(`Campo: ${campo}. No esta definido`);
     if (tipoEsperado == "date") {
         valor = new Date(valor);
         if (isNaN(valor.getTime()) || !(valor.getFullYear() <= 2040)) throw new Error(`La fecha es inválida.`);
     };
+    tipoEsperado = (tipoEsperado === "url") ? "string" : tipoEsperado;
     if (valor.constructor.name.toLowerCase() !== tipoEsperado.toLowerCase()) throw new Error(`El campo ${campo} con valor ${valor} no corresponde al tipo de dato.`);
+
     return { [campo]: valor instanceof Date ? valor.toISOString().split('T')[0] : valor };
 }
 

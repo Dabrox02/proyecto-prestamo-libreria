@@ -12,7 +12,8 @@ const interfaz = {
     "fecha_publicacion": "date",
     "isbn": "string",
     "num_paginas": "number",
-    "estadoId": "number"
+    "estadoId": "number",
+    "urlImg": "url"
 };
 
 const getAll = async () => {
@@ -56,14 +57,15 @@ export default {
 
 // * POST DE PRUEBA
 // console.log(await post({
-//     "id_autor": 1,
-//     "id_categoria": 5,
-//     "id_editorial": 5,
+//     "autoreId": 1,
+//     "categoriaId": 5,
+//     "editorialeId": 5,
 //     "titulo": "aliquam eu, accumsan",
 //     "fecha_publicacion": "2024-04-07",
 //     "isbn": "191E0EA6-B795-3651-62D5-2B2EAC8EC7EC",
 //     "num_paginas": 1188,
-//     "id_estado": 6
+//     "estadoId": 5,
+//     "urlImg": null
 // }));
 
 // * PUT DE PRUEBA
