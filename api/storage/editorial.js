@@ -1,4 +1,4 @@
-import crud from "../../crud/crud.js";
+import crud from "../crud/crud.js";
 
 const endpoint = `/editoriales`;
 const primaryKey = {
