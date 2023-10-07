@@ -13,10 +13,22 @@
     <link rel="stylesheet" href="../node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css">
     <!-- Estilos CSS de AdminLTE -->
     <link rel="stylesheet" href="../node_modules/admin-lte/dist/css/adminlte.min.css">
+    <!-- DataTables Estilos -->
+    <link rel="stylesheet" href="../node_modules/admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet"
+        href="../node_modules/admin-lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <!-- Estilos CSS Globales -->
     <link rel="stylesheet" href="../assets/style/style.css">
+    <!-- Estilos CSS Especificos -->
+    <link rel="stylesheet" href="../assets/style/libros/libros.css">
     <!-- jQuery -->
     <script src="../node_modules/admin-lte/plugins/jquery/jquery.min.js" defer></script>
+    <!-- jQuery DataTables -->
+    <script src="../node_modules/admin-lte/plugins/datatables/jquery.dataTables.min.js" defer></script>
+    <script src="../node_modules/admin-lte/plugins/datatables-responsive/js/dataTables.responsive.min.js"
+        defer></script>
+    <!-- DataTables Script -->
+    <script src="../node_modules/admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js" defer></script>
     <!-- Bootstrap -->
     <script src="../node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js" defer></script>
     <!-- Scripts de AdminLTE -->
@@ -29,32 +41,89 @@
     <div class="wrapper">
         <!-- Navbar -->
         <header-component></header-component>
-
         <!-- Main Sidebar Container -->
         <main-sidebar-component></main-sidebar-component>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Libros</h1>
+                    <div class="row px-2">
+                        <h1 class="badge badge-dark d-block">Libros</h1>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button Modal Add Books -->
+            <div class="container-fluid mb-3">
+                <div class="px-2">
+                    <button class="btn btn-success f-size-2 font-weight-light" data-toggle="modal"
+                        data-target="#exampleModal">
+                        Agregar Libro
+                    </button>
+                </div>
+            </div>
+
+            <!-- Form Books -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Agregar Libro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                        anyone else.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary f-size-3"
+                                data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary f-size-3">Agregar</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Main content -->
-            <div class="content">
-                <div id="grilla-libros"
-                    class="container-fluid d-flex flex-wrap justify-content-center align-items-center gap-3">
-
+            <div class="container-fluid">
+                <div class="mx-3">
+                    <table id="dt-libros" class="table table-light table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Titulo</th>
+                                <th>Autor</th>
+                                <th>Estado</th>
+                                <th>Categoria</th>
+                                <th>Editorial</th>
+                                <th>Fecha Publicacion</th>
+                                <th>Libro</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
-
         <!-- Main Footer -->
         <footer-component></footer-component>
     </div>

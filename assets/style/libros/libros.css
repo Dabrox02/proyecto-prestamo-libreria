@@ -1,0 +1,14 @@
+#dt-libros {
+    font-size: 1.5rem;
+}
+
+.img-table {
+    max-width: 200px;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+    #dt-libros {
+        font-size: 1.2rem;
+    }
+}
