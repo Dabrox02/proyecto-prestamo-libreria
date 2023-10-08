@@ -1,3 +1,9 @@
+dialog {
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
 .f-size-1 {
     font-size: 1.5rem;
 }
