@@ -4,7 +4,7 @@ import editorial from "./api/storage/editorial.js"
 import estado from "./api/storage/estado.js"
 import libro from "./api/storage/libro.js"
 import config from "./config.js";
-import { cargarTabla, cargarSelectsForm } from "./modules/libro.js";
+import { cargarTabla, cargarSelectsForm, agregarLibro, eliminarLibro } from "./modules/libro.js";
 
 const d = document;
 
@@ -22,30 +22,18 @@ export const app = async () => {
         let editorials = await editorial.getAll();
         let states = await estado.getAll();
         cargarSelectsForm({ authors, categories, editorials, states })
+
         document.addEventListener("submit", async (e) => {
             e.preventDefault();
             if (e.target.matches("#add-book-form")) {
                 let data = Object.fromEntries(new FormData(e.target));
-                let res = await libro.post({
-                    "autoreId": Number(data.autoreId),
-                    "categoriaId": Number(data.categoriaId),
-                    "editorialeId": Number(data.editorialeId),
-                    "titulo": data.titulo,
-                    "fecha_publicacion": data.fecha_publicacion,
-                    "isbn": data.isbn,
-                    "num_paginas": Number(data.num_paginas),
-                    "estadoId": Number(data.estadoId),
-                    "urlImg": data.urlImg ? data.urlImg : null
-                })
-                if (res.id) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Libro Agregado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
+                await agregarLibro({ data, fnPostLibro: libro.post });
+            }
+        })
 
+        document.addEventListener("click", async (e) => {
+            if (e.target.matches("#btn-del-book")) {
+                await eliminarLibro({ id: e.target.dataset.del, fnDelLibro: libro.deleteOne });
             }
         })
     }
