@@ -6,12 +6,12 @@ export const isCampoValido = ({ campo = "", valor, tipoEsperado }) => {
     } else if (valor === null) {
         valor = "";
     }
+    tipoEsperado = (tipoEsperado === "url") ? "string" : tipoEsperado;
     if (valor === null || valor === undefined) throw new Error(`Campo: ${campo}. No esta definido`);
     if (tipoEsperado == "date") {
         valor = new Date(valor);
         if (isNaN(valor.getTime()) || !(valor.getFullYear() <= 2040)) throw new Error(`La fecha es inválida.`);
     };
-    tipoEsperado = (tipoEsperado === "url") ? "string" : tipoEsperado;
     if (valor.constructor.name.toLowerCase() !== tipoEsperado.toLowerCase()) throw new Error(`El campo ${campo} con valor ${valor} no corresponde al tipo de dato.`);
 
     return { [campo]: valor instanceof Date ? valor.toISOString().split('T')[0] : valor };
@@ -31,8 +31,12 @@ export const isRelacionValida = async ({ obj }) => {
 }
 
 export const isDataCompleta = async ({ obj }) => {
-    for (const e of obj) {
-        isObjectoValido(e);
-        await isRelacionValida({ obj: e });
+    try {
+        for (const e of obj) {
+            isObjectoValido(e);
+            await isRelacionValida({ obj: e });
+        }
+    } catch (e) {
+        return { status: 400, message: e.message }
     }
 }

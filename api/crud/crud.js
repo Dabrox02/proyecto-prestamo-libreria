@@ -11,8 +11,13 @@ const getAll = async ({ endpoint }) => {
         config.method = "GET";
         config.body = undefined;
         let res = await (await fetch(`${env.uri}${endpoint}`, config)).json();
-        await isDataCompleta({ obj: res });
-        return res;
+        const validDataPromises = res.map(async (e) => {
+            let valid = await isDataCompleta({ obj: [e] });
+            return typeof valid === 'undefined' ? e : null;
+        });
+        const validData = await Promise.all(validDataPromises);
+        const cleanData = validData.filter((e) => e !== null);
+        return cleanData;
     } catch (e) {
         return { status: 400, message: e.message }
     }
@@ -38,8 +43,13 @@ const getAllDetails = async ({ endpoint }) => {
         config.method = "GET";
         config.body = undefined;
         let res = await (await fetch(uri, config)).json();
-        await isDataCompleta({ obj: res });
-        return res;
+        const validDataPromises = res.map(async (e) => {
+            let valid = await isDataCompleta({ obj: [e] });
+            return typeof valid === 'undefined' ? e : null;
+        });
+        const validData = await Promise.all(validDataPromises);
+        const cleanData = validData.filter((e) => e !== null);
+        return cleanData;
     } catch (e) {
         return { status: 400, message: e.message };
     }
@@ -66,24 +76,24 @@ const post = async ({ endpoint, interfaz, obj }) => {
         isObjectoValido(obj);
         Object.entries(interfaz).forEach(e => Object.assign(body, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })));
         await isRelacionValida({ obj });
+        config.method = "POST";
+        config.body = JSON.stringify(body);
+        let res = await (await fetch(`${env.uri}${endpoint}`, config)).json();
+        return res;
     } catch (e) {
         return { status: 400, message: e.message }
     }
-    config.method = "POST";
-    config.body = JSON.stringify(body);
-    let res = await (await fetch(`${env.uri}${endpoint}`, config)).json();
-    return res;
 }
 
 const deleteOne = async ({ endpoint, primaryKey, id }) => {
     try {
         isCampoValido({ campo: Object.keys(primaryKey)[0], valor: id, tipoEsperado: Object.values(primaryKey)[0] });
+        config.method = "DELETE";
+        let res = await fetch(`${env.uri}${endpoint}/${id}`, config);
+        if (res.status == 404) throw new Error(`No fue encontrado para eliminar.`);
     } catch (e) {
         return { status: 400, message: e.message };
     }
-    config.method = "DELETE";
-    let res = await fetch(`${env.uri}${endpoint}/${id}`, config);
-    return res.status;
 }
 
 const putOne = async ({ endpoint, primaryKey, interfaz, obj }) => {
@@ -94,13 +104,13 @@ const putOne = async ({ endpoint, primaryKey, interfaz, obj }) => {
         isCampoValido({ campo: Object.keys(primaryKey)[0], valor: obj.id, tipoEsperado: Object.values(primaryKey)[0] });
         Object.entries(interfaz).forEach(e => obj[e[0]] ? Object.assign(data, isCampoValido({ campo: e[0], valor: obj[e[0]], tipoEsperado: e[1] })) : "");
         await isRelacionValida({ obj });
+        config.method = "PUT";
+        config.body = JSON.stringify(data);
+        let res = await (await fetch(`${env.uri}${endpoint}/${obj.id}`, config)).json();
+        return res;
     } catch (e) {
         return { status: 400, message: e.message };
     }
-    config.method = "PUT";
-    config.body = JSON.stringify(data);
-    let res = await (await fetch(`${env.uri}${endpoint}/${obj.id}`, config)).json();
-    return res;
 }
 
 export default {
