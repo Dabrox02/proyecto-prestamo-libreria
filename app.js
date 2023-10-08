@@ -6,12 +6,20 @@ import libro from "./api/storage/libro.js"
 import config from "./config.js";
 import { cargarTablaAutor, formAgregarAuthor, agregarAutor, eliminarAutor, editarAutor, formEditarAutor } from "./modules/autor.js"
 import { cargarTablaLibro, formAgregarLibro, agregarLibro, eliminarLibro, editarLibro, formEditarLibro } from "./modules/libro.js";
+import { cargarTablaCategoria, formAgregarCategoria, agregarCategoria, eliminarCategoria, editarCategoria, formEditarCategoria } from "./modules/categoria.js";
 
 
 const d = document;
 const $ = (e) => d.querySelector(e);
 
 export const app = async () => {
+
+    document.addEventListener("click", async (e) => {
+        if (e.target.matches(".btn-close-modal")) {
+            e.target.closest("dialog").close();
+        }
+    })
+
     let path = window.location.pathname.split(".")[0];
     if (path === "/index") {
         console.log(path);
@@ -36,10 +44,6 @@ export const app = async () => {
         })
 
         document.addEventListener("click", async (e) => {
-            if (e.target.matches(".btn-close-modal")) {
-                e.target.closest("dialog").close();
-            }
-
             if (e.target.matches("#btn-add-book")) {
                 $("#modal-book").showModal();
                 $("#modal-book").innerHTML = "";
@@ -93,10 +97,6 @@ export const app = async () => {
         })
 
         document.addEventListener("click", async (e) => {
-            if (e.target.matches(".btn-close-modal")) {
-                e.target.closest("dialog").close();
-            }
-
             if (e.target.matches("#btn-add-author")) {
                 $("#modal-author").showModal();
                 $("#modal-author").innerHTML = "";
@@ -113,6 +113,44 @@ export const app = async () => {
                 $("#modal-author").showModal();
                 $("#modal-author").innerHTML = "";
                 $("#modal-author").insertAdjacentHTML("beforeend", formEditarAutor(author));
+            }
+        })
+    }
+
+    if (path === "/views/categorias") {
+        cargarTablaCategoria({ url: config.uri, fnGetCategories: categoria.getAll });
+
+        document.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (e.target.matches("#add-category-form")) {
+                let data = Object.fromEntries(new FormData(e.target));
+                await agregarCategoria({ data, fnPostCategoria: categoria.post });
+                e.target.closest("dialog").close();
+            }
+            if (e.target.matches("#edit-category-form")) {
+                let data = Object.fromEntries(new FormData(e.target));
+                await editarCategoria({ data: { "id": e.target.dataset.edit, ...data }, fnPutCategoria: categoria.putOne });
+                e.target.closest("dialog").close();
+            }
+        })
+
+        document.addEventListener("click", async (e) => {
+            if (e.target.matches("#btn-add-category")) {
+                $("#modal-category").showModal();
+                $("#modal-category").innerHTML = "";
+                $("#modal-category").insertAdjacentHTML("beforeend", formAgregarCategoria());
+            }
+
+            if (e.target.matches("#btn-del-category")) {
+                await eliminarCategoria({ id: e.target.dataset.del, fnDelCategoria: categoria.deleteOne });
+            }
+
+            if (e.target.matches("#btn-edit-category")) {
+                let editar = e.target.dataset.edit;
+                let category = await categoria.getOne(Number(editar));
+                $("#modal-category").showModal();
+                $("#modal-category").innerHTML = "";
+                $("#modal-category").insertAdjacentHTML("beforeend", formEditarCategoria(category));
             }
         })
     }

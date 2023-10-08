@@ -1,6 +1,6 @@
 import { swalAlert } from "../components/swal-alert/swal-alert-component.js"
 
-export const cargarTablaAutor = async ({ url, fnGetAutores }) => {
+export const cargarTablaAutor = async ({ fnGetAutores }) => {
     let authors = await fnGetAutores();  // Modo Fast
     const table = new DataTable('#dt-authors', {
         "responsive": true, "lengthChange": true, "autoWidth": false
