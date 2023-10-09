@@ -20,10 +20,10 @@ export class SidebarComponent extends HTMLElement {
           <!-- Sidebar user panel -->
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-              <img src="https://img.icons8.com/?size=256&id=12KiRC81sMRC&format=png" class="img-circle elevation-2" alt="User Image">
+              <img src="https://img.icons8.com/?size=256&id=iEBcQcM9rnZ9&format=png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <a href="#" class="d-block">Jaider Mendoza</a>
+              <a href="https://github.com/Dabrox02" target="_blank" class="d-block">Jaider Mendoza</a>
             </div>
           </div>
   

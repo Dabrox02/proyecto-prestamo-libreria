@@ -2,23 +2,23 @@
   "categorias": [
     {
       "id": 1,
-      "nombre": "blandit viverra."
+      "nombre": "Misterio"
     },
     {
       "id": 2,
-      "nombre": "Sed dictum."
+      "nombre": "Erotismo"
     },
     {
       "id": 3,
-      "nombre": "nulla ante,"
+      "nombre": "Psicologico"
     },
     {
       "id": 4,
-      "nombre": "non enim."
+      "nombre": "Ficcion"
     },
     {
       "id": 5,
-      "nombre": "convallis dolor."
+      "nombre": "Aventura"
     }
   ],
   "editoriales": [
@@ -51,6 +51,12 @@
       "nombre": "Mi Ac PC",
       "direccion": "4710 Ridiculus Avenue",
       "telefono": "(764) 468-9931"
+    },
+    {
+      "nombre": "Cielo Azul",
+      "direccion": "Clle 1B Mumbai",
+      "telefono": "(577) 8954216",
+      "id": 6
     }
   ],
   "estados": [
@@ -78,6 +84,11 @@
       "id": 5,
       "nombre": "egestas a,",
       "descripcion": "Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris."
+    },
+    {
+      "nombre": "Espera",
+      "descripcion": "Se encuentra en proceso",
+      "id": 6
     }
   ],
   "libros": [
@@ -98,22 +109,24 @@
       "autoreId": 2,
       "categoriaId": 4,
       "editorialeId": 5,
-      "titulo": "arcu.",
+      "titulo": "ARCU.",
       "fecha_publicacion": "2024-05-16",
       "isbn": "39705505-1",
       "num_paginas": 1507,
-      "estadoId": 5
+      "estadoId": 5,
+      "urlImg": "https://edit.org/images/cat/portadas-libros-big-2019101610.jpg"
     },
     {
       "id": 3,
       "autoreId": 4,
       "categoriaId": 5,
       "editorialeId": 3,
-      "titulo": "nisi. Aenean eget metus.",
+      "titulo": "NISI. AENEAN EGET METUS.",
       "fecha_publicacion": "2023-05-23",
       "isbn": "25381765-8",
       "num_paginas": 328,
-      "estadoId": 4
+      "estadoId": 4,
+      "urlImg": "https://www.letraminuscula.com/wp-content/uploads/Portada-55x85-EL-CAMINO-DE-LA-GUERRERA-663x1024.jpg"
     },
     {
       "id": 4,
@@ -128,37 +141,25 @@
     },
     {
       "id": 5,
-      "autoreId": 3,
-      "categoriaId": 3,
-      "editorialeId": 3,
-      "titulo": "ornare sagittis felis.",
-      "fecha_publicacion": "2022-10-10",
-      "isbn": "27225855-4",
-      "num_paginas": 552,
+      "autoreId": 1,
+      "categoriaId": 5,
+      "editorialeId": 5,
+      "titulo": "ALIQUAM EU, ACCUMSAN",
+      "fecha_publicacion": "2024-04-07",
+      "isbn": "191e0ea6-b795-3651-62d5-2b2eac8ec7ec",
+      "num_paginas": 1188,
       "estadoId": 5
     },
     {
       "autoreId": 1,
       "categoriaId": 5,
       "editorialeId": 5,
-      "titulo": "aliquam eu, accumsan",
+      "titulo": "EL COLOR PERDIDO DEL BOSQUE",
       "fecha_publicacion": "2024-04-07",
-      "isbn": "191E0EA6-B795-3651-62D5-2B2EAC8EC7EC",
+      "isbn": "191e0ea6-b795-3651-62d5-2b2eac8ec7ec",
       "num_paginas": 1188,
       "estadoId": 5,
-      "urlImg": "",
-      "id": 6
-    },
-    {
-      "autoreId": 1,
-      "categoriaId": 5,
-      "editorialeId": 5,
-      "titulo": "aliquam eu, accumsan",
-      "fecha_publicacion": "2024-04-07",
-      "isbn": "191E0EA6-B795-3651-62D5-2B2EAC8EC7EC",
-      "num_paginas": 1188,
-      "estadoId": 5,
-      "urlImg": "",
+      "urlImg": "https://i.pinimg.com/736x/ab/7a/1d/ab7a1d8d8ac9e4bcf501689ad50dda9d.jpg",
       "id": 7
     },
     {
@@ -298,6 +299,14 @@
       "fecha_prestamo": "2024-02-15",
       "fecha_devolucion": "2023-05-11",
       "estado": "dignissim tempor"
+    },
+    {
+      "usuarioId": 3,
+      "libroId": 1,
+      "fecha_prestamo": "2000-09-01",
+      "fecha_devolucion": "2004-09-02",
+      "estado": "Pagado",
+      "id": 6
     }
   ],
   "reservas": [
@@ -371,13 +380,19 @@
       "id": 5,
       "nombre": "Jayme",
       "apellido": "Mcconnell",
-      "nacionalidad": "Brazil"
+      "nacionalidad": "Brasileño"
     },
     {
       "nombre": "Jonah",
       "apellido": "Ewing",
-      "nacionalidad": "español",
+      "nacionalidad": "Español",
       "id": 6
+    },
+    {
+      "nombre": "Carlos",
+      "apellido": "Macro",
+      "nacionalidad": "Colombiano",
+      "id": 7
     }
   ],
   "usuarios": [

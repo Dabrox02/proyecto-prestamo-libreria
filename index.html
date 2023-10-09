@@ -40,7 +40,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Starter Page</h1>
+              <h1 class="m-0">Bienvenido</h1>
             </div>
           </div>
         </div>
@@ -50,22 +50,35 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6">
-
-              <!-- Card -->
+            <!-- Card -->
+            <div class="col-10 mx-auto">
               <div class="card">
                 <div class="card-header">
-                  <h5 class="m-0">Featured</h5>
+                  <h5 class="m-0">Visita Nuestra Sección De Libros</h5>
                 </div>
                 <div class="card-body">
-                  <h6 class="card-title">Special title treatment</h6>
-
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                  <div id="carouselBooks" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner bg-dark">
+                      <div class="carousel-item active text-center">
+                        <img src="assets/img/templateBook.png" class="img-carousel d-inline-block" alt="templateBook">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-target="#carouselBooks" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-target="#carouselBooks" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </button>
+                  </div>
+                  <div class="p-2">
+                    <a href="views/libros.html" class="btn btn-outline-primary d-block mx-auto">Ir a Libros</a>
+                  </div>
                 </div>
               </div>
-
             </div>
+
           </div>
         </div>
       </div>

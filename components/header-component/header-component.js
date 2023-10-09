@@ -18,7 +18,7 @@ export class HeaderComponent extends HTMLElement {
             <a href="${config.uri}/index.html" class="nav-link f-size-3">Inicio</a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link f-size-3">GitHub</a>
+            <a href="https://github.com/Dabrox02" target="_blank" class="nav-link f-size-3">GitHub</a>
           </li>
         </ul>
   

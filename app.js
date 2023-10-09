@@ -29,8 +29,17 @@ export const app = async () => {
     })
 
     let path = window.location.pathname.split(".")[0];
+
     if (path === "/index") {
-        console.log(path);
+        const imgTmp = `${config.uri}/assets/img/templateBook.png`;
+        let librosIndex = await libro.getAll();
+        [...librosIndex].slice(0, 10).forEach((libro) => {
+            $("#carouselBooks .carousel-inner").insertAdjacentHTML("beforeend", /*html*/`
+            <div class="carousel-item text-center">
+                <img src="${libro.urlImg || imgTmp}" class="img-carousel d-inline-block" alt="${libro.titulo}">
+            </div>
+            `)
+        })
     }
 
     if (path === "/views/libros") {

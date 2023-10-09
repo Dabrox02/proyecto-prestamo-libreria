@@ -16,6 +16,11 @@ dialog {
     font-size: 1.1rem;
 }
 
+.img-carousel {
+    width: 100%;
+    max-width: 350px;
+}
+
 @media screen and (max-width: 768px) {
     .f-size-1 {
         font-size: 1.2rem;
