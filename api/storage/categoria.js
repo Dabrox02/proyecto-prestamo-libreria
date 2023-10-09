@@ -45,20 +45,3 @@ export default {
     putOne,
     deleteOne
 }
-
-// * POST DE PRUEBA
-// console.log(await post({
-//     "nombre": "sed pede. Cum"
-// }));
-
-// * PUT DE PRUEBA
-// console.log(await putOne({
-//     "id": 2,
-//     "nombre": "science"
-// }));
-
-// * DELETE DE PRUEBA
-// console.log(await deleteOne(2));
-
-// * GETALL DE PRUEBA
-// console.log(await getAll());

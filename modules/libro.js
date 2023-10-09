@@ -1,8 +1,8 @@
 import { swalAlert } from "../components/swal-alert/swal-alert-component.js"
 
 export const cargarTablaLibro = async ({ url, fnGetLibros }) => {
-    // let books = await fnGetLibros(); // Modo Slow
-    let books = await (await fetch("http://127.0.0.1:5010/libros/details")).json();  // Modo Fast
+    let books = await fnGetLibros(); // Modo Slow
+    // let books = await (await fetch("http://127.0.0.1:5010/libros/details")).json();  // Modo Fast
     const imgTmp = `${url}/assets/img/templateBook.png`;
     const table = new DataTable('#dt-libros', {
         "responsive": true, "lengthChange": true, "autoWidth": false

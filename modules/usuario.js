@@ -1,7 +1,7 @@
 import { swalAlert } from "../components/swal-alert/swal-alert-component.js"
 
 export const cargarTablaUsuario = async ({ fnGetUsers }) => {
-    let users = await fnGetUsers();  // Modo Fast
+    let users = await fnGetUsers();
     const table = new DataTable('#dt-users', {
         "responsive": true, "lengthChange": true, "autoWidth": false
     });

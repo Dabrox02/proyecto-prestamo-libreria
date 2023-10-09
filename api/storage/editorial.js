@@ -47,24 +47,3 @@ export default {
     putOne,
     deleteOne
 }
-
-// * POST DE PRUEBA
-// console.log(await post({
-//     "nombre": "cielo azul",
-//     "direccion": "P.O. Box 101, 5321 Sem Rd.",
-//     "telefono": "31541654"
-// }));
-
-// * PUT DE PRUEBA
-// console.log(await putOne({
-//     "id": 2,
-//     "nombre": "Demetrius Slater",
-//     "direccion": "Ap #152-812 Sapien, Rd.",
-//     "telefono": "704-1101"
-// }));
-
-// * DELETE DE PRUEBA
-// console.log(await deleteOne(2));
-
-// * GETALL DE PRUEBA
-// console.log(await getAll());

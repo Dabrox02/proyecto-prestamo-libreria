@@ -49,28 +49,3 @@ export default {
     putOne,
     deleteOne
 }
-
-// * POST DE PRUEBA
-// console.log(await post({
-//     "id_usuario": 854,
-//     "id_libro": 551,
-//     "fecha_prestamo": "2024-02-01",
-//     "fecha_devolucion": "2024-05-30",
-//     "estado": "pharetra."
-// }));
-
-// * PUT DE PRUEBA
-// console.log(await putOne({
-//     "id": 2,
-//     "id_usuario": 920,
-//     "id_libro": 3,
-//     "fecha_prestamo": "2023-06-11",
-//     "fecha_devolucion": "2023-08-08",
-//     "estado": "dignissim"
-// }));
-
-// * DELETE DE PRUEBA
-// console.log(await deleteOne(2));
-
-// * GETALL DE PRUEBA
-// console.log(await getAll());

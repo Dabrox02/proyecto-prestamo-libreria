@@ -46,22 +46,3 @@ export default {
     putOne,
     deleteOne
 }
-
-// * POST DE PRUEBA
-// console.log(await post({
-//     "nombre": "Demetrius Slater",
-//     "descripcion": "quis accumsan convallis, ante lectus convallis est, vitae"
-// }));
-
-// * PUT DE PRUEBA
-// console.log(await putOne({
-//     "id": 2,
-//     "nombre": "Reese Marks",
-//     "descripcion": "eu, accumsan sed, facilisis vitae, orci. Phasellus dapibus quam quis"
-// }));
-
-// * DELETE DE PRUEBA
-// console.log(await deleteOne(2));
-
-// * GETALL DE PRUEBA
-// console.log(await getAll());

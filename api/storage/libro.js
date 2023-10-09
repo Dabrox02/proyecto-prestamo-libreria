@@ -53,38 +53,3 @@ export default {
     putOne,
     deleteOne
 }
-
-
-// * POST DE PRUEBA
-// console.log(await post({
-//     "autoreId": 1,
-//     "categoriaId": 5,
-//     "editorialeId": 5,
-//     "titulo": "aliquam eu, accumsan",
-//     "fecha_publicacion": "2024-04-07",
-//     "isbn": "191E0EA6-B795-3651-62D5-2B2EAC8EC7EC",
-//     "num_paginas": 1188,
-//     "estadoId": 5,
-//     "urlImg": null
-// }));
-
-// * PUT DE PRUEBA
-// console.log(await putOne({
-//     "id": 1,
-//     "id_autor": 5,
-//     "id_categoria": 1,
-//     "id_editorial": 5,
-//     "titulo": "in, cursus et, eros. Proin",
-//     "fecha_publicacion": "2023-10-18",
-//     "isbn": "A32AAAA7-7BA1-3459-17A2-623A8152E1EE",
-//     "num_paginas": 258,
-//     "id_estado": 1
-// }));
-
-// * DELETE DE PRUEBA
-// console.log(await deleteOne(2));
-
-// * GETALL DE PRUEBA
-// console.log(await getAll());
-// console.log(await getAllDetails());
-// console.log(await getOneDetails(2));
