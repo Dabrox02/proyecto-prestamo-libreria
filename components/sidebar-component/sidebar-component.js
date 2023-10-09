@@ -81,6 +81,12 @@ export class SidebarComponent extends HTMLElement {
                       <p>Reservas</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                  <a href="${config.uri}/views/prestamos.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                      <p>Prestamos</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
             </ul>

@@ -14,6 +14,8 @@ import { cargarTablaEstado, formAgregarEstado, agregarEstado, eliminarEstado, ed
 import { cargarTablaEditorial, formAgregarEditorial, agregarEditorial, eliminarEditorial, editarEditorial, formEditarEditorial } from "./modules/editorial.js";
 import { cargarTablaUsuario, formAgregarUsuario, agregarUsuario, eliminarUsuario, editarUsuario, formEditarUsuario } from "./modules/usuario.js";
 import { cargarTablaReserva, formAgregarReserva, agregarReserva, eliminarReserva, editarReserva, formEditarReserva } from "./modules/reserva.js";
+import { cargarTablaPrestamo, formAgregarPrestamo, agregarPrestamo, eliminarPrestamo, editarPrestamo, formEditarPrestamo } from "./modules/prestamo.js";
+
 
 const d = document;
 const $ = (e) => d.querySelector(e);
@@ -317,6 +319,54 @@ export const app = async () => {
                 }));
                 $("#book").value = reserv.libroId;
                 $("#user").value = reserv.usuarioId;
+            }
+        })
+    }
+
+    if (path === "/views/prestamos") {
+        let fnGetPrestamos = prestamo.getAllDetails;
+        cargarTablaPrestamo({ url: config.uri, fnGetPrestamos });
+
+        document.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (e.target.matches("#add-prestamo-form")) {
+                let data = Object.fromEntries(new FormData(e.target));
+                await agregarPrestamo({ data, fnPostPrestamo: prestamo.post });
+                e.target.closest("dialog").close();
+            }
+            if (e.target.matches("#edit-prestamo-form")) {
+                let data = Object.fromEntries(new FormData(e.target));
+                await editarPrestamo({ data: { "id": e.target.dataset.edit, ...data }, fnPutPrestamo: prestamo.putOne });
+                e.target.closest("dialog").close();
+            }
+        })
+
+        document.addEventListener("click", async (e) => {
+            if (e.target.matches("#btn-add-prestamo")) {
+                $("#modal-prestamo").showModal();
+                $("#modal-prestamo").innerHTML = "";
+                $("#modal-prestamo").insertAdjacentHTML("beforeend", await formAgregarPrestamo({
+                    fnGetUsers: usuario.getAll,
+                    fnGetBooks: libro.getAll
+                }));
+            }
+
+            if (e.target.matches("#btn-del-prestamo")) {
+                await eliminarPrestamo({ id: e.target.dataset.del, fnDelPrestamo: prestamo.deleteOne });
+            }
+
+            if (e.target.matches("#btn-edit-prestamo")) {
+                let editar = e.target.dataset.edit;
+                let loan = await prestamo.getOne(Number(editar));
+                $("#modal-prestamo").showModal();
+                $("#modal-prestamo").innerHTML = "";
+                $("#modal-prestamo").insertAdjacentHTML("beforeend", await formEditarPrestamo({
+                    prestamo: loan,
+                    fnGetUsers: usuario.getAll,
+                    fnGetBooks: libro.getAll
+                }));
+                $("#book").value = loan.libroId;
+                $("#user").value = loan.usuarioId;
             }
         })
     }
