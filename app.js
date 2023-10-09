@@ -3,13 +3,16 @@ import categoria from "./api/storage/categoria.js"
 import editorial from "./api/storage/editorial.js"
 import estado from "./api/storage/estado.js"
 import libro from "./api/storage/libro.js"
+import usuario from "./api/storage/usuario.js"
+import prestamo from "./api/storage/prestamo.js"
+import reserva from "./api/storage/reserva.js"
 import config from "./config.js";
 import { cargarTablaAutor, formAgregarAuthor, agregarAutor, eliminarAutor, editarAutor, formEditarAutor } from "./modules/autor.js"
 import { cargarTablaLibro, formAgregarLibro, agregarLibro, eliminarLibro, editarLibro, formEditarLibro } from "./modules/libro.js";
 import { cargarTablaCategoria, formAgregarCategoria, agregarCategoria, eliminarCategoria, editarCategoria, formEditarCategoria } from "./modules/categoria.js";
 import { cargarTablaEstado, formAgregarEstado, agregarEstado, eliminarEstado, editarEstado, formEditarEstado } from "./modules/estados.js";
 import { cargarTablaEditorial, formAgregarEditorial, agregarEditorial, eliminarEditorial, editarEditorial, formEditarEditorial } from "./modules/editorial.js";
-
+import { cargarTablaUsuario, formAgregarUsuario, agregarUsuario, eliminarUsuario, editarUsuario, formEditarUsuario } from "./modules/usuario.js";
 
 
 const d = document;
@@ -229,6 +232,43 @@ export const app = async () => {
                 $("#modal-editorial").showModal();
                 $("#modal-editorial").innerHTML = "";
                 $("#modal-editorial").insertAdjacentHTML("beforeend", formEditarEditorial(editor));
+            }
+        })
+    }
+
+    if (path === "/views/usuarios") {
+        cargarTablaUsuario({ url: config.uri, fnGetUsers: usuario.getAll });
+        document.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (e.target.matches("#add-user-form")) {
+                let data = Object.fromEntries(new FormData(e.target));
+                await agregarUsuario({ data, fnPostUsuario: usuario.post });
+                e.target.closest("dialog").close();
+            }
+            if (e.target.matches("#edit-user-form")) {
+                let data = Object.fromEntries(new FormData(e.target));
+                await editarUsuario({ data: { "id": e.target.dataset.edit, ...data }, fnPutUsuario: usuario.putOne });
+                e.target.closest("dialog").close();
+            }
+        })
+
+        document.addEventListener("click", async (e) => {
+            if (e.target.matches("#btn-add-user")) {
+                $("#modal-user").showModal();
+                $("#modal-user").innerHTML = "";
+                $("#modal-user").insertAdjacentHTML("beforeend", formAgregarUsuario());
+            }
+
+            if (e.target.matches("#btn-del-user")) {
+                await eliminarUsuario({ id: e.target.dataset.del, fnDelUsuario: usuario.deleteOne });
+            }
+
+            if (e.target.matches("#btn-edit-user")) {
+                let editar = e.target.dataset.edit;
+                let user = await usuario.getOne(Number(editar));
+                $("#modal-user").showModal();
+                $("#modal-user").innerHTML = "";
+                $("#modal-user").insertAdjacentHTML("beforeend", formEditarUsuario(user));
             }
         })
     }

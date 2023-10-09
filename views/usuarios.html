@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editoriales - Prestamos Libreria</title>
+    <title>Usuarios - Prestamos Libreria</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -51,33 +51,35 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row px-2">
-                        <h1 class="badge badge-dark d-block">Editorial</h1>
+                        <h1 class="badge badge-dark d-block">Usuarios</h1>
                     </div>
                 </div>
             </div>
 
-            <!-- Button Modal Add State -->
+            <!-- Button Modal Add User -->
             <div class="container-fluid mb-3">
                 <div class="px-2">
-                    <button id="btn-add-editorial" class="btn btn-success f-size-2 font-weight-light">
-                        Agregar Editorial
+                    <button id="btn-add-user" class="btn btn-success f-size-2 font-weight-light">
+                        Agregar usuario
                     </button>
                 </div>
             </div>
 
-            <dialog id="modal-editorial">
+            <dialog id="modal-user">
             </dialog>
 
             <!-- Main content -->
-            <div class="container-xl">
+            <div class="container-fluid">
                 <div class="mx-3">
-                    <table id="dt-editorial" class="table table-light table-striped">
+                    <table id="dt-users" class="table table-light table-striped">
                         <thead class="table-dark text-center">
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
+                                <th>Apellido</th>
                                 <th>Direccion</th>
                                 <th>Telefono</th>
+                                <th>Email</th>
                                 <th>Funciones</th>
                             </tr>
                         </thead>
