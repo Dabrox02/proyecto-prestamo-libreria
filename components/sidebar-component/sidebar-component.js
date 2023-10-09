@@ -63,6 +63,12 @@ export class SidebarComponent extends HTMLElement {
                       <p>Estados</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                  <a href="${config.uri}/views/editoriales.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                      <p>Editoriales</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
             </ul>

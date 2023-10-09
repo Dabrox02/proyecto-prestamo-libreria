@@ -8,6 +8,7 @@ import { cargarTablaAutor, formAgregarAuthor, agregarAutor, eliminarAutor, edita
 import { cargarTablaLibro, formAgregarLibro, agregarLibro, eliminarLibro, editarLibro, formEditarLibro } from "./modules/libro.js";
 import { cargarTablaCategoria, formAgregarCategoria, agregarCategoria, eliminarCategoria, editarCategoria, formEditarCategoria } from "./modules/categoria.js";
 import { cargarTablaEstado, formAgregarEstado, agregarEstado, eliminarEstado, editarEstado, formEditarEstado } from "./modules/estados.js";
+import { cargarTablaEditorial, formAgregarEditorial, agregarEditorial, eliminarEditorial, editarEditorial, formEditarEditorial } from "./modules/editorial.js";
 
 
 
@@ -191,6 +192,43 @@ export const app = async () => {
                 $("#modal-state").showModal();
                 $("#modal-state").innerHTML = "";
                 $("#modal-state").insertAdjacentHTML("beforeend", formEditarEstado(state));
+            }
+        })
+    }
+
+    if (path === "/views/editoriales") {
+        cargarTablaEditorial({ url: config.uri, fnGetEditorials: editorial.getAll });
+        document.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (e.target.matches("#add-editorial-form")) {
+                let data = Object.fromEntries(new FormData(e.target));
+                await agregarEditorial({ data, fnPostEditorial: editorial.post });
+                e.target.closest("dialog").close();
+            }
+            if (e.target.matches("#edit-editorial-form")) {
+                let data = Object.fromEntries(new FormData(e.target));
+                await editarEditorial({ data: { "id": e.target.dataset.edit, ...data }, fnPutEditorial: editorial.putOne });
+                e.target.closest("dialog").close();
+            }
+        })
+
+        document.addEventListener("click", async (e) => {
+            if (e.target.matches("#btn-add-editorial")) {
+                $("#modal-editorial").showModal();
+                $("#modal-editorial").innerHTML = "";
+                $("#modal-editorial").insertAdjacentHTML("beforeend", formAgregarEditorial());
+            }
+
+            if (e.target.matches("#btn-del-editorial")) {
+                await eliminarEditorial({ id: e.target.dataset.del, fnDelEditorial: editorial.deleteOne });
+            }
+
+            if (e.target.matches("#btn-edit-editorial")) {
+                let editar = e.target.dataset.edit;
+                let editor = await editorial.getOne(Number(editar));
+                $("#modal-editorial").showModal();
+                $("#modal-editorial").innerHTML = "";
+                $("#modal-editorial").insertAdjacentHTML("beforeend", formEditarEditorial(editor));
             }
         })
     }

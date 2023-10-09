@@ -92,7 +92,6 @@ export const eliminarEstado = async ({ id, fnDelState }) => {
 }
 
 export const editarEstado = async ({ data, fnPutState }) => {
-    console.log(data);
     let res = await fnPutState({
         "id": numeroValido(data.id),
         "nombre": data.nombre,
