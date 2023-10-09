@@ -7,6 +7,8 @@ import config from "./config.js";
 import { cargarTablaAutor, formAgregarAuthor, agregarAutor, eliminarAutor, editarAutor, formEditarAutor } from "./modules/autor.js"
 import { cargarTablaLibro, formAgregarLibro, agregarLibro, eliminarLibro, editarLibro, formEditarLibro } from "./modules/libro.js";
 import { cargarTablaCategoria, formAgregarCategoria, agregarCategoria, eliminarCategoria, editarCategoria, formEditarCategoria } from "./modules/categoria.js";
+import { cargarTablaEstado, formAgregarEstado, agregarEstado, eliminarEstado, editarEstado, formEditarEstado } from "./modules/estados.js";
+
 
 
 const d = document;
@@ -151,6 +153,44 @@ export const app = async () => {
                 $("#modal-category").showModal();
                 $("#modal-category").innerHTML = "";
                 $("#modal-category").insertAdjacentHTML("beforeend", formEditarCategoria(category));
+            }
+        })
+    }
+
+    if (path === "/views/estados") {
+        cargarTablaEstado({ url: config.uri, fnGetStates: estado.getAll });
+
+        document.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (e.target.matches("#add-state-form")) {
+                let data = Object.fromEntries(new FormData(e.target));
+                await agregarEstado({ data, fnPostState: estado.post });
+                e.target.closest("dialog").close();
+            }
+            if (e.target.matches("#edit-state-form")) {
+                let data = Object.fromEntries(new FormData(e.target));
+                await editarEstado({ data: { "id": e.target.dataset.edit, ...data }, fnPutState: estado.putOne });
+                e.target.closest("dialog").close();
+            }
+        })
+
+        document.addEventListener("click", async (e) => {
+            if (e.target.matches("#btn-add-state")) {
+                $("#modal-state").showModal();
+                $("#modal-state").innerHTML = "";
+                $("#modal-state").insertAdjacentHTML("beforeend", formAgregarEstado());
+            }
+
+            if (e.target.matches("#btn-del-state")) {
+                await eliminarEstado({ id: e.target.dataset.del, fnDelState: estado.deleteOne });
+            }
+
+            if (e.target.matches("#btn-edit-state")) {
+                let editar = e.target.dataset.edit;
+                let state = await estado.getOne(Number(editar));
+                $("#modal-state").showModal();
+                $("#modal-state").innerHTML = "";
+                $("#modal-state").insertAdjacentHTML("beforeend", formEditarEstado(state));
             }
         })
     }
