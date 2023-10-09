@@ -4,8 +4,8 @@ import editorial from "./api/storage/editorial.js"
 import estado from "./api/storage/estado.js"
 import libro from "./api/storage/libro.js"
 import usuario from "./api/storage/usuario.js"
-import prestamo from "./api/storage/prestamo.js"
 import reserva from "./api/storage/reserva.js"
+import prestamo from "./api/storage/prestamo.js"
 import config from "./config.js";
 import { cargarTablaAutor, formAgregarAuthor, agregarAutor, eliminarAutor, editarAutor, formEditarAutor } from "./modules/autor.js"
 import { cargarTablaLibro, formAgregarLibro, agregarLibro, eliminarLibro, editarLibro, formEditarLibro } from "./modules/libro.js";
@@ -13,7 +13,7 @@ import { cargarTablaCategoria, formAgregarCategoria, agregarCategoria, eliminarC
 import { cargarTablaEstado, formAgregarEstado, agregarEstado, eliminarEstado, editarEstado, formEditarEstado } from "./modules/estados.js";
 import { cargarTablaEditorial, formAgregarEditorial, agregarEditorial, eliminarEditorial, editarEditorial, formEditarEditorial } from "./modules/editorial.js";
 import { cargarTablaUsuario, formAgregarUsuario, agregarUsuario, eliminarUsuario, editarUsuario, formEditarUsuario } from "./modules/usuario.js";
-
+import { cargarTablaReserva, formAgregarReserva, agregarReserva, eliminarReserva, editarReserva, formEditarReserva } from "./modules/reserva.js";
 
 const d = document;
 const $ = (e) => d.querySelector(e);
@@ -269,6 +269,54 @@ export const app = async () => {
                 $("#modal-user").showModal();
                 $("#modal-user").innerHTML = "";
                 $("#modal-user").insertAdjacentHTML("beforeend", formEditarUsuario(user));
+            }
+        })
+    }
+
+    if (path === "/views/reservas") {
+        let fnGetReservas = reserva.getAllDetails;
+        cargarTablaReserva({ url: config.uri, fnGetReservas });
+
+        document.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (e.target.matches("#add-reserva-form")) {
+                let data = Object.fromEntries(new FormData(e.target));
+                await agregarReserva({ data, fnPostReserva: reserva.post });
+                e.target.closest("dialog").close();
+            }
+            if (e.target.matches("#edit-reserva-form")) {
+                let data = Object.fromEntries(new FormData(e.target));
+                await editarReserva({ data: { "id": e.target.dataset.edit, ...data }, fnPutReserva: reserva.putOne });
+                e.target.closest("dialog").close();
+            }
+        })
+
+        document.addEventListener("click", async (e) => {
+            if (e.target.matches("#btn-add-reserva")) {
+                $("#modal-reserva").showModal();
+                $("#modal-reserva").innerHTML = "";
+                $("#modal-reserva").insertAdjacentHTML("beforeend", await formAgregarReserva({
+                    fnGetUsers: usuario.getAll,
+                    fnGetBooks: libro.getAll
+                }));
+            }
+
+            if (e.target.matches("#btn-del-reserva")) {
+                await eliminarReserva({ id: e.target.dataset.del, fnDelReserva: reserva.deleteOne });
+            }
+
+            if (e.target.matches("#btn-edit-reserva")) {
+                let editar = e.target.dataset.edit;
+                let reserv = await reserva.getOne(Number(editar));
+                $("#modal-reserva").showModal();
+                $("#modal-reserva").innerHTML = "";
+                $("#modal-reserva").insertAdjacentHTML("beforeend", await formEditarReserva({
+                    reserva: reserv,
+                    fnGetUsers: usuario.getAll,
+                    fnGetBooks: libro.getAll
+                }));
+                $("#book").value = reserv.libroId;
+                $("#user").value = reserv.usuarioId;
             }
         })
     }
